@@ -1,0 +1,31 @@
+<h1>Circle Name: <%= @circle.name %></h1>
+<h3>Members</h3>
+<ul>
+<%@circle.users.each do |user|%>
+<li><%=user.email%></li>
+<%end%>
+</ul>
+<% if @circle.users.include?(current_user) %>
+  <%= link_to "Create a New Post", new_post_url %>
+<% end %>
+
+<%if owns_circle?(@circle) %>
+<%= button_to "Delete Circle", circle_url(@circle), method: :delete %>
+<br>
+<%= link_to "Edit Circle", edit_circle_url(@circle) %>
+<%end%>
+<br>
+<%= link_to "<<Back to All Circles", circles_url %>
+  
+  <br>
+<h3>Circle Posts</h3>
+<ul>
+<%@circle.posts.each do |post|%>
+  <% @links = Link.all.select{|link| link.post_id == post.id } %>
+  <% if @links %>
+    <% @links.each do |link| %>
+      <li><%= link.url %></li>
+    <% end %>
+  <%end%>
+<% end %>
+</ul>

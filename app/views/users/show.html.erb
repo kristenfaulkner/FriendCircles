@@ -1,0 +1,17 @@
+<h1>Welcome <%=current_user.email%></h1>
+<h3>Circles I own</h3>
+<ul>
+  <%current_user.owned_circles.each do |circle|%>
+  <li><%=link_to circle.name, circle_url(circle)%></li>
+  <%end%>
+</ul>
+
+<h3>Circles I belong to</h3>
+<ul>
+  <%current_user.circles.each do |circle|%>
+  <li><%=link_to circle.name, circle_url(circle)%></li>
+  <%end%>
+</ul>
+
+<%= link_to "Create a New Post", new_post_url %>
+<%= link_to "Posts shared with me", user_feeds_url(current_user)%>

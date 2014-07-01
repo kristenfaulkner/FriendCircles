@@ -1,0 +1,27 @@
+ <h1>Edit Circle</h1>
+ 
+<form action='<%= circle_url(@circle) %>' method='POST'>
+  <input type='hidden' name='_method' value='patch'>
+
+<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+  
+  
+    <label>
+      Circle Name
+      <input type = "text" name= "circle[name]" value= "<%=@circle.name%>">
+    </label>
+    
+    
+   <%User.all.each do |user|%>
+   <br>
+    <label>
+        <input type="checkbox" name="circle[user_ids][]" value = "<%=user.id%>"
+    <%="checked" if user.circles.include?(@circle) %>>
+        <%=user.email%>
+    </label>
+    <br>
+  <%end%>
+<input type="hidden" name="circle[user_ids][]" value="">
+  <input type="submit" value="Submit">
+ 
+</form>

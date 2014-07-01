@@ -1,0 +1,42 @@
+<h1>Create a new post</h1>
+
+<form method="post" action="<%=posts_url%>">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <label>Post Title
+<input type="text" name="post[name]" value="<%=@post.name%>">
+</label>
+
+<label>Body
+  <input type="text" name="post[body]" value="<%= @post.body %>">
+</label>
+
+<input type="hidden" name="post[owner_id]" value="<%=current_user.id%>">
+
+<br>
+<label>
+  Link 1
+  <input type="text" name="links[1][url]">
+</label>
+<br>
+<label>
+  Link 2
+  <input type="text" name="links[2][url]">
+</label>
+<br>
+<label>
+  Link 3
+  <input type="text" name="links[3][url]">
+</label>
+<br>
+Which circles would you like to share your post with? (check all that apply)
+<%current_user.circles.each do |circle|%>
+<br>
+<label>
+    <input type="checkbox" name="post[circle_ids][]" value = "<%=circle.id%>">
+    <%=circle.name%>
+</label>
+<br>
+<%end%>
+
+<input type="submit" value="Create Post">
+</form>

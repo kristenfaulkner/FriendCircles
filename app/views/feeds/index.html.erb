@@ -1,0 +1,15 @@
+<h1>Your Post Feed</h1>
+<ul>
+<% current_user.circles.each do |circle|%>
+  <%circle.posts.each do |post| %>
+  <li>Title: <%=post.name%></li>
+  <br>
+  Body: <%=post.body%>
+  <br>
+  <%post.links.each do |link|%>
+  <%=link.url%>
+  <br>
+<%end%>
+<%end%>
+<%end%>
+</ul>
